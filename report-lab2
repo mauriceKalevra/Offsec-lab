@@ -1,5 +1,6 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{markdown}
 
 %opening
 \title{Offensive security\\Lab-report}
@@ -10,11 +11,58 @@
 \maketitle
 
 \begin{abstract}
-\noindent This document contains reports about the offensive security laboraty. 
+\noindent This document contains reports about the laboratory of the 5th semester module offensive security. 
 \end{abstract}
-
+\newpage
 \section{Lab2}
 \subsection{Exercise 2.2}
+\begin{center}
+\textbf{https://www.hs-albsig.de} 
+\end{center}
+\$ nslookup hs-albsig.de \\
+- IP: 94.186.153.201\\ 
+
+
+\noindent\$ nmap -sC -sV -oA 94.186.153.201\\
+- Open ports: 80(HTTP), 443(HTTPS)\\
+- Server: nginx 1.16.1
+- HTTP Version: 1.1 
+\\
+\\
+\$ whois hs-albsig\\
+- SOA: ns.hs-albsig.de. (141.87.109.5)\\  
+
+
+
+Namerserver:
+\begin{itemize}
+\item Nserver: dns1.belwue.de
+\item Nserver: dns3.belwue.de
+\item Nserver: dns5.belwue.de
+\item Nserver: ns.hs-albsig.de 141.87.109.5
+\end{itemize}
+
+\noindent\$ fierce --domain hs-albsig
+\\
+\begin{itemize}
+ \item helpdesk.hs-albsig.de - 141.87.114.175
+ \item info.hs-albsig.de - 141.87.114.205
+ \item konferenz.hs-albsig.de - 141.87.115.200
+ \item intern.hs-albsig.de - 141.87.109.198
+ \item autodiscover.hs-albsig.de - 141.87.109.198
+ \item h1crelay1.hs-albsig.de -141.87.109.200
+ \item intranet.hs-albsig.de - 141.87.109.198
+ \item jobs.hs-albsig.de - 62.204.161.138
+ \item live.hs-albsig.de - 141.87.190.3
+ \item login.hs-albsig.de - 194.98.248.75
+ \item mail.hs-albsig.de - 141.87.114.190
+ \item mailig.hs-albsig.de - 54.73.30.56
+ \item ntp.hs-albsig.de - 141.87.190.5
+ \item pki.hs-albsig.de - 141.87.109.3
+ \item proxy.hs-albsig.de - 141.87.109.4
+\end{itemize}
+
+
 
 
 \end{document}
