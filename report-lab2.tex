@@ -1,0 +1,80 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{markdown}
+
+%opening
+\title{Offensive security\\Lab-report}
+\author{Moritz Rupp}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent This document contains reports about the laboratory of the 5th semester module offensive security. 
+\end{abstract}
+\newpage
+\section{Lab2}
+\subsection{Exercise 2.2}
+\begin{center}
+\textbf{https://www.hs-albsig.de} 
+\end{center}
+\$\raisebox{-0.9ex}{\~{}} nslookup hs-albsig.de \\
+IP: 94.186.153.201\\ 
+
+
+\noindent\$\raisebox{-0.9ex}{\~{}} nmap -sC -sV -oA 94.186.153.201\\
+Open ports: 80(HTTP), 443(HTTPS)\\
+Server: nginx 1.16.1\\
+HTTP Version: 1.1 
+\\
+\\
+\$\raisebox{-0.9ex}{\~{}} whois hs-albsig\\
+SOA: ns.hs-albsig.de. (141.87.109.5)\\  
+Namerserver:
+\begin{itemize}
+\item Nserver: dns1.belwue.de
+\item Nserver: dns3.belwue.de
+\item Nserver: dns5.belwue.de
+\item Nserver: ns.hs-albsig.de 141.87.109.5
+\end{itemize}
+
+\noindent\$\raisebox{-0.9ex}{\~{}} fierce --domain hs-albsig --wide\\
+Some if the found subdomains, all belonging to the main host of hs-albsig!\\
+To see the full list, take a look at the file 'fierceoutput.txt'.  
+\\
+\begin{itemize}
+ \item helpdesk.hs-albsig.de. - 141.87.114.175
+ \item info.hs-albsig.de. - 141.87.114.205
+ \item konferenz.hs-albsig.de. - 141.87.115.200
+ \item intern.hs-albsig.de. - 141.87.109.198
+ \item autodiscover.hs-albsig.de. - 141.87.109.198
+ \item h1crelay1.hs-albsig.de. -141.87.109.200
+ \item intranet.hs-albsig.de. - 141.87.109.198
+ \item jobs.hs-albsig.de. - 62.204.161.138
+ \item live.hs-albsig.de. - 141.87.190.3
+ \item login.hs-albsig.de. - 194.98.248.75
+ \item mail.hs-albsig.de. - 141.87.114.190
+ \item mailig.hs-albsig.de. - 54.73.30.56
+ \item ntp.hs-albsig.de. - 141.87.190.5
+ \item pki.hs-albsig.de. - 141.87.109.3
+ \item proxy.hs-albsig.de. - 141.87.109.4
+ \item datascience.hs-albsig.de. - 141.87.109.223
+  
+
+\end{itemize}
+
+\vspace{10mm}
+\noindent Recon-ng provides the same results.\\
+\noindent\$\raisebox{-0.9ex}{\~{}} recon-ng\\
+\$\raisebox{-0.9ex}{\~{}} marketplace search hackertarget\\
+\$\raisebox{-0.9ex}{\~{}} marketplace install hackertarget\\
+\$\raisebox{-0.9ex}{\~{}} modules load hackertarget\\ 
+\$\raisebox{-0.9ex}{\~{}} options set SOURCE hs-albsig.de\\
+\$\raisebox{-0.9ex}{\~{}} run \dots
+
+\newpage
+\subsection{Exercise 2.3}
+3 Out of my 10 mail adresses have been part of a leagage..
+
+\end{document}
