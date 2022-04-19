@@ -14,6 +14,7 @@
 \noindent This document contains reports about the laboratory of the 5th semester module offensive security. 
 \end{abstract}
 \tableofcontents
+
 \newpage
 \section{Lab2}
 \subsection{Exercise 2.2}
@@ -39,9 +40,9 @@ Namerserver:
 \item Nserver: dns5.belwue.de
 \item Nserver: ns.hs-albsig.de 141.87.109.5
 \end{itemize}
-
-\noindent\$\raisebox{-0.9ex}{\~{}} fierce --domain hs-albsig --wide\\
-Some if the found subdomains, all belonging to the main host of hs-albsig!\\
+ 
+\noindent\$\raisebox{-0.9ex}{\~{}} fierce   --domain hs-albsig --wide\\
+Some of the found subdomains, all belonging to the main host of hs-albsig!\\
 To see the full list, take a look at the file 'fierceoutput.txt'.  
 \\
 \begin{itemize}
@@ -73,13 +74,25 @@ To see the full list, take a look at the file 'fierceoutput.txt'.
 \$\raisebox{-0.9ex}{\~{}} marketplace install hackertarget\\
 \$\raisebox{-0.9ex}{\~{}} modules load hackertarget\\ 
 \$\raisebox{-0.9ex}{\~{}} options set SOURCE hs-albsig.de\\
-\$\raisebox{-0.9ex}{\~{}} run \dots
+\$\raisebox{-0.9ex}{\~{}} run
+
+\vspace{5mm}
+\noindent \textbf{More interesting information about the host hs-albsig.de:\\
+Common http security headers are missing!}\\
+\begin{itemize}
+\item Content-security-policy(csp)
+\item HTTP Strict Transport Security (HSTS)
+\item Cross Site Scripting Protection (X-XSS)
+\item X-Frame-Options
+\item X-Content-Type-Options(no sniff)
+ \end{itemize}
+
 
 \newpage
 \subsection{Exercise 2.3}
 Out of my 10 email adresses, 3 have been part of a leagage.
-A paid licence is required to view the actuall document content.
-It is possible tho to see the origin of the leagage.\\
+A paid licence is required to view the actuall document content tho.
+But it is possible to see the origin of the leagage.\\
 Leagage origins:
 \begin{itemize}
  \item Dailymotion.com
@@ -88,9 +101,26 @@ Leagage origins:
  \item RepZ.eu
  \item hqcombo.top
 \end{itemize}
-\vspace{8mm}
-Phonebook.nz was able to find over 500 email adresses of albstadt uni members. The majority of leagages matched the above listing.
+\vspace{3mm}
+Phonebook.cz was able to find over 500 email adresses of albstadt uni members. The majority of leagages matched the above listing.
 With the help of tools and websites such as lullar.com, mSpy and peekyou i was able to find the according social media accounts of several email adresses. 
 \subsection{Exercise 2.4}
+Searching for company related documents with metagoofil:\\
+\noindent\$\raisebox{-0.9ex}{\~{}} metagoofil -t pdf -d hs-albsig\\
 
+\noindent Metagoofil found several hundred uni related documents including sensitive files like exams and salary information.\\
+Exemplary scan of one of the found documents with \textbf{exiftool}. 
+\begin{center}
+
+\includegraphics[scale=0.35]{exif.png} 
+\end{center}
+\textbf{Particular interesting information:}\\
+File Size: If much bigger than expected, that could be a sign for more hidden meta data like steganography etc.\\
+File modification/access date/time: Was the file created prior to certain vulnabilities/patches etc.?! \\
+MIME Type: Is the file the format it claims to be?! Executable malware can be hidden as a fake format like pdf or jpg.\\
+Creator: Can be used to ascertain to what department someone belongs to. This can further be used for more osint.\\
+Geotag: If pictures show sensitive infrastrucure of a company(server, admin rooms etc.) the geotag can be used to find the real location. This can be used for stuff like dumbster diving etc.  \\
+\vspace{3mm}
+
+\noindent It can be noticed that most documents didnt include sensitive information such as geotags etc.
 \end{document}
