@@ -1,0 +1,23 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{Offensive Security\\
+	Lab-report
+}
+\author{Moritz Rupp}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\begin{abstract}
+Lab3 documentation
+\end{abstract}
+\newpage
+\section{Exercise 3}
+\subsection{3.1}
+Salea offers an extension 'Saleae-Hex-Dec-Char-to-Terminal` that offers converting low level analyser output to human readable data. This way we can write the bewished encoding like ascii to a file of choice.\\
+With the help of a simple Python script, it's now possible to read out the flag.
+
+\end{document}
