@@ -18,6 +18,7 @@ Lab3 documentation
 \section{Exercise 3}
 \subsection{3.1}
 Salea offers an extension 'Saleae-Hex-Dec-Char-to-Terminal` that offers converting low level analyser output to human readable data. This way we can write the bewished encoding like ascii to a file of choice.\\
-With the help of a simple Python script, it's now possible to read out the flag.
+With the help of a simple Python script, it's now possible to read out the flag. Hallo 
+
 
 \end{document}
