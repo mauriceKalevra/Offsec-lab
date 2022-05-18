@@ -63,8 +63,27 @@ The next task is to find the correct password characters. We can achieve this by
  \includegraphics[scale=0.5]{pw.png}
 \end{center}
 Using the same method like in our previous function, we can now try to find the right char! But since python in Jupyter Notebook is awfully inconsistent and runs like garbage we're failing to guess the correct passwort characters.
-\subsection{Password Cracking - Simple Power Analysis Attack}
-\subsection{AES - Correlation Power Analysis Attack}
 \newpage
+\subsection{Password Cracking - Simple Power Analysis Attack}
+For the power analaysis we need to compare input traces with a given reference. Since  correct inputs compute dissimilar and will generate significantly different traces than   the referenced ones, we can try to guess the correct password by extracting those!
+\begin{center}
+\includegraphics[scale=0.5]{3.4.png}
+\end{center}
+We compare the traces of all characters with the referenced and safe the different values with their corresponding index. But again we fail and cant even blame python this time.
 \subsection{ARP spoofing on the Metasploitable 2 VM}
+In arpspoofing we use tools such as arpspoof, driftnet etc. to send out forget ARP responses. The forged responses results in linking of an attacker’s MAC address with the IP address of a legitimate participant of the network.\\
+With tools like netdiscover and arp -a we can discover the needed information.
+After some more config we further have to configure arpspoof.\\
+\$ arpspoof -i eth0 -t 192.168.0.104 192.168.0.1\\
+\$ arpspoof -i eth0 -t 192.168.0.1 192.168.0.104\\
+With Wireshark we can now read out the traffic, including unencrypted http traffic.
+\begin{center}
+\includegraphics[scale=0.5]{wire.png} 
+\end{center}
+The first packet beeing the login.
+\begin{center}
+ \includegraphics[scale=0.5]{login.png}
+\end{center}
+
+
 \end{document}
