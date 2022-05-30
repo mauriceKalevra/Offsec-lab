@@ -9,9 +9,7 @@
 
 \maketitle
 
-\begin{abstract}
 
-\end{abstract}
 \newpage
 \section{Lab 4}
 \subsection{A Basic Stack Overflow Attack}
@@ -19,13 +17,23 @@ We are provided with a vulnareble piece of C Code that can be exploited to trigg
 \begin{center}
  \includegraphics[scale=0.3]{gcc.png}
 \end{center} 
-After failing to trigger the exploit by passing different input lengths, we take a closer look at the programm with the help of GDB.\\
+After failing to trigger the exploit by simply passing different input lengths, we take a closer look at the programm with the help of GDB.\\
 At first we look at the assemler Code. To make it more readable we set the disassembler flavor to intel. \includegraphics[scale=0.4]{intelfalvor.png}\\
-After further inspection we realize that we need to find the starting adress of the hidden function, that includes the 'Flag' that proves the success of the attack.
+After further inspection we realize that we need to find the starting adress of the hidden function, that returns the 'Flag' that proves the success of the attack.
 \begin{center}
  \includegraphics[scale=0.5]{hidden.png}
 \end{center}
 Starting adress is '0x565561b9'.\\
-When we pass this adress as the 'overflow' we can execute the function 'hidden'.
+When we pass this adress to eip we can execute the function 'hidden'.
+With the help of breakpoints and single stepping we reckon to overwrite 16bytes.
+Hence we write 16 arbitrary bytes followed by the starting adress of the hidden function to a file and pipe it to the binary execution. 
+\begin{center}
+ \includegraphics[scale=0.5]{bytes.png}
+\end{center}
+This doesnt work and after some research, we find this is due to different architecture design. When we add 4 more bytes it works!
+\begin{center}
+ \includegraphics[scale=0.5]{found.png}
+\end{center}
+\subsection{Spawning A Shell With Shellcode}
 
 \end{document}
