@@ -47,5 +47,37 @@ When we feed this to the programm we spawn a shell.
 
 
 \newpage
-\subsection{}
+\subsection{Spawning A Shell With ret2libc}
+The goal is to spawn another shell, but this time by calling a library function.
+Specifically the glibc function call system(). For this attack we can reuse the vulnareble C programm exploitable2.c, hence we will pass the payload again as a parameter.
+For this exploit to work, we again have to disable ASLR!\\
+After some research i realize how to put together the payload.
+\begin{center}
+ Dummy data + System Address + Exit Address + Shell Address.\\
+
+\end{center}
+System and exit adress can be found using GDBs info command.
+\begin{center}
+ \includegraphics[scale=0.5]{system.png}
+\end{center}
+\begin{center}
+ \includegraphics[scale=0.5]{exit.png}
+\end{center}
+It took me a while to realize how to find the 'bin/bash' adress, but eventually found a small C programm that does the job.
+\begin{center}
+\includegraphics[scale=0.5]{basha.png}
+
+\end{center}
+bin/bash adress: 
+\includegraphics[scale=0.5]{bash.png}\\
+Now we can construct our payload by putting these adresses together after filling the buffer with arbitrary bytes.\\
+Our first payload attempt.
+\begin{center}
+\includegraphics[scale=0.5]{pay.png} 
+\end{center}
+When we pass this to the programm we get a shell.
+
+\newpage
+\subsection{Spawning Meterpreter}
+This attack is similar to 4.2 only that we generate the payload by using metasploit.
 \end{document}
