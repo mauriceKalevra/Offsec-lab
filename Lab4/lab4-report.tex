@@ -8,7 +8,7 @@
 \begin{document}
 
 \maketitle
-
+\tableofcontents
 
 \newpage
 \section{Lab 4}
@@ -30,7 +30,7 @@ Hence we write 16 arbitrary bytes followed by the starting adress of the hidden 
 \begin{center}
  \includegraphics[scale=0.5]{bytes.png}
 \end{center}
-This doesnt work and after some research, we find this is due to different architecture design(e.g. adding random byte lengths to registers). When we add 4 more bytes it works!
+This doesnt work and after some research, we find this is due to different architecture design(e.g. adding random 4 bytes). When we add 4 more bytes it works!
 \begin{center}
  \includegraphics[scale=0.5]{found.png}
 \end{center}
@@ -41,15 +41,22 @@ Furthermore we have to determine the adress of buff and add it to the input.
 \begin{center}
  \includegraphics[scale=0.5]{breakpoint.png}
 \end{center}
-Buff has 0xffffce68. Adding up 8 bytes of dummy data to fill buff plus overwriting the stack pointer and the return adress we need to pass 16 bytes before we can deliver our payload.\\
+Buff has 0xffffce68. Adding up 8 bytes of dummy data to fill it up, plus overwriting the stack pointer and the return adress we need to pass 16 bytes(+4 arbitrary bytes) before we can deliver our payload.\\
 This results in the following input parameter.
+\begin{center}
+ \includegraphics[scale=0.4]{pay2.png}
+\end{center}
+After several tries and adress adjustments it works.
 When we feed this to the programm we spawn a shell.
+\begin{center}
+ \includegraphics[scale=0.5]{shells.png}
+\end{center}
 
 
 \newpage
 \subsection{Spawning A Shell With ret2libc}
 The goal is to spawn another shell, but this time by calling a library function.
-Specifically the glibc function call system(). For this attack we can reuse the vulnareble C programm exploitable2.c, hence we will pass the payload again as a parameter.
+Specifically the glibc function call 'system()'. For this attack we can reuse the vulnareble C programm exploitable2.c, hence we will pass the payload again as a parameter.
 For this exploit to work, we again have to disable ASLR!\\
 After some research i realize how to put together the payload.
 \begin{center}
@@ -75,8 +82,11 @@ Our first payload attempt.
 \begin{center}
 \includegraphics[scale=0.5]{pay.png} 
 \end{center}
-When we pass this to the programm we get a shell.
-
+After further research we realize that the given 'bin/bash' adress of our programm is not correct. Using gdb we get the correct one. We also have to adjust the payload.
+\begin{center}
+ \includegraphics[scale=0.5]{pay3.png}
+\end{center}
+When we pass this to the programm we should get get a shell. Due to the adress build of system, it doesnt work on my machine. After further adjustments on 2 different VMs, we get a shell.
 \newpage
 \subsection{Spawning Meterpreter}
 This attack is similar to 4.2 only that we generate the payload by using metasploit.
