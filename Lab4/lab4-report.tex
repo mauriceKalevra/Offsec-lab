@@ -13,7 +13,7 @@
 \newpage
 \section{Lab 4}
 \subsection{A Basic Stack Overflow Attack}
-We are provided with a vulnareble piece of C Code that can be exploited to trigger a basic Stack overflow. Since modern architectures have several countermeasures to prevent such abuse, we have to compile the Code as shown in the lecture nodes to let the exploit work!
+We are provided with a vulnerable piece of C Code, that can be exploited to trigger a basic Stack overflow. Since modern architectures have several countermeasures to prevent such abuse, we have to compile the Code as shown in the lecture nodes to let the exploit work.
 \begin{center}
  \includegraphics[scale=0.3]{gcc.png}
 \end{center} 
@@ -30,13 +30,13 @@ Hence we write 16 arbitrary bytes followed by the starting adress of the hidden 
 \begin{center}
  \includegraphics[scale=0.5]{bytes.png}
 \end{center}
-This doesnt work and after some research, we find this is due to different architecture design(e.g. adding random 4 bytes). When we add 4 more bytes it works!
+This doesnt work and after some research we find out that this is due to different architecture design(e.g. adding random 4 bytes). When we add those 4 more bytes it works!
 \begin{center}
  \includegraphics[scale=0.5]{found.png}
 \end{center}
 \subsection{Spawning A Shell With Shellcode}
 This time we want to inject our own code to spawn a shell by executing 'bin/bash'. We are provided with a similar C programm that expects an input parameter this time, but has the same vulnerability. We want to inject the string of 'bin/bash' to the stack and then execute the 'command' with the help of a system call.
-We construct this by writing a simple assembler 'programm' and compile it with the help of nasm. This results in a file with the corresponding object code that includes the shellcode as an hexadecimal string which we can pass to the programm with perl. 
+We construct this by writing a simple assembler 'programm' and compile it with the help of nasm. This results in a file with the corresponding object code that includes the shellcode as an hexadecimal string which we can pass to the programm via perl. 
 Furthermore we have to determine the adress of buff and add it to the input.
 \begin{center}
  \includegraphics[scale=0.5]{breakpoint.png}
@@ -56,7 +56,7 @@ When we feed this to the programm we spawn a shell.
 \newpage
 \subsection{Spawning A Shell With ret2libc}
 The goal is to spawn another shell, but this time by calling a library function.
-Specifically the glibc function call 'system()'. For this attack we can reuse the vulnareble C programm exploitable2.c, hence we will pass the payload again as a parameter.
+Specifically the glibc function call 'system()'. For this attack we can reuse the vulnerable C programm exploitable2.c, hence we will pass the payload again as a parameter.
 For this exploit to work, we again have to disable ASLR!\\
 After some research i realize how to put together the payload.
 \begin{center}
@@ -86,8 +86,22 @@ After further research we realize that the given 'bin/bash' adress of our progra
 \begin{center}
  \includegraphics[scale=0.5]{pay3.png}
 \end{center}
-When we pass this to the programm we should get get a shell. Due to the adress build of system, it doesnt work on my machine. After further adjustments on 2 different VMs, we get a shell.
+When we pass this to the programm we should get get a shell. Due to the adress build of system, it doesnt work on my machine. After further adjustments on 2 different VMs, we get a shell.\\
+The clear advantage over 4.2 is that we only need to execute already existing code of the system, rather than injecting our own!
 \newpage
 \subsection{Spawning Meterpreter}
-This attack is similar to 4.2 only that we generate the payload by using metasploit.
+This attack is similar to 4.2, but this time we generate the payload by using msfvenom. This framework is a Metasploit standalone payload generator. The basic concept of the attack remains the same tho!\\
+After reading the man pages we come up with the following command structure to generate the payload.\
+\begin{center}
+ msfvenom --format --payload --platform --LPORT 
+\end{center}
+\begin{center}
+ \includegraphics[scale=0.4]{pay4.png}
+\end{center}
+After we add the needed amount of filling bytes plus the according adress, we can write the payload to a file and format it accordingly. Now we can feed this file to our porgramm and connect via nc.
+\begin{center}
+ \includegraphics[scale=0.5]{pay6.png}
+\end{center}
+
+
 \end{document}
