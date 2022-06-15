@@ -18,7 +18,11 @@
 \maketitle
 \tableofcontents
 \begin{abstract}
-Lab 5 Dokumentation
+\begin{center}
+ Lab 5 Dokumentation
+
+\end{center}
+
 \end{abstract}
 \newpage
 \section{Lab 5}
@@ -48,7 +52,25 @@ This should be the key to decrypt the whole sequence. With the help of an online
 \end{center}
 \newpage
 \subsection{Exercise 5.2 - AES-CBC Decryption Oracle}
+(In collaboration with Maximilian Heim!)\\
+We are provided with an executable and a ciphertext, that includes an initialisation vector and 2 AES cipher blocks.\\
+First we make the programm executable. When we run it without parameters it gives us a useage hint.
+\begin{center}
+ \includegraphics[scale=0.5]{hint.png}
+\end{center}
+When passing the iv with different parameters the programm prompts valid or invalid which can be used to decrypt the sequence. 
 
+The attack format is run by passing:
+\begin{center}
+ IV + padding + cipher block
+\end{center}
+Following the lecture slides we came up with the following.
+We generate the padding, pass it, listen to the output if valid or invalid. If valid we use the index byte xor it with r and the byte of the first parameter. We do this with the follow up bytes and apply it on both blocks.
+When converted to an ASCII string and formated properly we get the success output!
+\begin{center}
+ \includegraphics[scale=0.45]{sucess.png}
+
+\end{center}
 
 
 
