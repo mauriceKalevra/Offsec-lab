@@ -22,7 +22,7 @@ The goal is to trigger a basic sql injection.\\
 SQL injection are possible if database queries are constructed based on user input. If we submit the right string, our inputs can execute sql commands, which can be used to read of the database. 
 
 We start with a simple sql-injection to extract the list of usernames and password hashes. Hence we set the the DVWA security setting to low. \\
-First we try around and list database users:\\
+First we try around and list database users.\\
 \begin{verbatim}
  %' or 0=0 union select null, user() #
 

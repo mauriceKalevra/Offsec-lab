@@ -1,0 +1,3 @@
+\contentsline {section}{\numberline {1}Exercise 6.1 - Basic SQL Injections}{2}{}%
+\contentsline {section}{\numberline {2}Exercise 6.2 - Remote Shell SQL Injections}{4}{}%
+\contentsline {section}{\numberline {3}Exercise 6.3 - Remote Shell SQL Injections and Privilege Escalation}{5}{}%
